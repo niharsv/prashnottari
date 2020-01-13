@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+    {% for answer in answers %}
+      <div>
+        <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=answer.question.pk %}"><h6>{{ answer.question.text }}</h6></a></p>
+        <p class="mb-0">asked by : <span class="boldfont"><i>{{ answer.question.asker }}</i></span> at <i>{{ answer.question.created_date }}</i></p>
+        <p>you have added this answer on <i>{{ answer.added_date }}</i></p>
+        <p>{{ answer.text }}</p>
+        <p class="boldfont"><a class="color1" href="{% url 'write_answer' pk=answer.question.pk %}">edit this answer</a></p>
+        <br>
+      </div>
+
+    {% empty %}
+        <p><i>oh, you've not answered any question yet.. </i></p>
+    {% endfor %}
+
+  {% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+    {% for question in questions %}
+      <div>
+
+        <div class="hoverable" style="padding: 10px; margin-bottom: 10px">
+        <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=question.pk %}"><h6>{{ question.text }}</h6></a></p>
+        <p>Asked at <i>{{ question.created_date }}</i></p>
+        </div>
+
+      </div>
+    {% empty %}
+      <p><i>oh, you've asked no questions, </i><a class="color1 navbar-item" href="{% url 'ask' %}"> Ask one</a></p>
+    {% endfor %}
+
+
+  {% endblock %}

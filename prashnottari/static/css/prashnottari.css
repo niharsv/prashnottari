@@ -1,0 +1,57 @@
+.brand{
+    color: #c1704f !important;
+    font-family: 'Yeon Sung', cursive;
+}
+
+.content{
+    padding-top: 80px;
+}
+
+.box_above{
+  border: black 1px solid;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.color1{
+  color: #6b3c29 !important;
+}
+
+.font1{
+  font-family: 'Vollkorn', serif;
+}
+
+.font2{
+  font-family: 'PT Sans', sans-serif;
+}
+
+.custom_button{
+  background-color: #6b3c29;
+  color: #fff;
+}
+
+.cancel_button{
+  background-color: #eee;
+  color: #222;
+}
+
+.shadowed_navbar{
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 5px 5px -5px #999;
+  background-color: white;
+  padding-bottom: 0px;
+}
+
+.question_title{
+  font-size: x-large;
+}
+
+.navbar-item{
+  padding-left: 50px !important;
+  font-weight: 600;
+}
+
+.boldfont{
+  font-weight: bold;
+}

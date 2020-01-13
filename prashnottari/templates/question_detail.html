@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+    <div>
+    <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=question.pk %}"><h6>{{question.text}}</h6></a></p>
+    <p>asked By : <span class="boldfont"><i>{{question.asker}}</i></span></p>
+    {% if user.is_authenticated %}
+    <p class="boldfont"><a class="color1" href="{% url 'write_answer' pk=question.pk %}">submit your answer</a></p>
+    {% endif %}
+    <br>
+    </div>
+
+    <div>
+      <p><i>Answers to this question:</i></p>
+    </div>
+
+    {% for answer in answers %}
+    <div class="font2">
+      <p>answer From : <span class="boldfont"><i>{{answer.answerer}}</i></span> at <i>{{answer.added_date}}</i></p>
+      <p>{{answer.text}}</p>
+      <br>
+    </div>
+    {% endfor %}
+
+  {% endblock %}

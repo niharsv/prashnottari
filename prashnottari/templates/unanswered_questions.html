@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+    {% for question in questions %}
+      <div>
+
+        {% if question.pk in unanswered_question_pks %}
+        <div class="hoverable" style="padding: 10px; margin-bottom: 10px">
+        <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=question.pk %}"><h6>{{ question.text }}</h6></a></p>
+        <p>asked by : <span class="boldfont"><i>{{ question.asker }}</i></span> at <i>{{ question.created_date }}</i></p>
+        </div>
+        {% endif %}
+
+      </div>
+
+    {% endfor %}
+
+
+  {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+    <div>
+    <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=question.pk %}"><h6>{{question.text}}</h6></a></p>
+    <p>asked By : <span class="boldfont"><i>{{question.asker}}</i></span> at <i>{{ question.created_date }}</i></p>
+    </div>
+
+    <div>
+      <form method="post">
+        {% csrf_token %}
+        {% include 'baseform.html' with form=form %}
+        <div class="row justify-content-center font2">
+          <button type="submit" class="btn custom_button">Submit</button>
+          <a class="btn cancel_button" href="{% url 'home' %}">Cancel</a>
+        </div>
+      </form>
+    </div>
+
+  {% endblock %}

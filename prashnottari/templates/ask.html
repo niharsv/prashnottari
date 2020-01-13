@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+  <div class="font2">
+    <p><i>Your Question :</i></p>
+    <form method="post">
+      {% csrf_token %}
+      {% include 'baseform.html' with form=form %}
+      <div class="row justify-content-center font2">
+        <button type="submit" class="btn custom_button">Ask</button>
+        <a class="btn cancel_button" href="{% url 'home' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+<!--  <div id="questions">
+    <div class="container">
+      <div v-for="question in questions" class="row">
+        <div class="col-sm-6">
+          [[ question.text ]]
+        </div>
+        <div class="col-sm-6">
+          [[ question.created_date ]]
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!--  <script type="text/javascript">
+
+ var q = new Vue({
+   el: '#questions',
+   delimiters: ['[[',']]'],
+   data: {
+   questions: [],
+   loading: false,
+ },
+   mounted: function() {
+    this.getQuestions();
+},
+ methods: {
+   getQuestions: function() {
+  this.loading = true;
+  this.$http.get('http://127.0.0.1:8000/api/questions/')
+      .then(response => (this.questions = response.data));
+    }
+}
+ });
+ </script> -->
+
+  {% endblock %}

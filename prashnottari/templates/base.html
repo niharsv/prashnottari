@@ -1,0 +1,111 @@
+{% load static %}
+
+<html>
+
+<head>
+        <title>Prashnottari</title>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans|Vollkorn&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/prashnottari.css' %}">
+
+        <script src="https://kit.fontawesome.com/4bf0daec3f.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="background-color: ivory;">
+
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-toggleable-sm navbar-inverse bg-inverse shadowed_navbar">
+
+  <div style="margin-left: 100px;"><a class="navbar-brand mx-auto font1 color1" href="{% url 'home' %}"><span class="boldfont"><h1>Prashnottari</h1></span></a></div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+  <ul class="nav navbar-nav ml-auto" style="margin-right: 100px;">
+
+  <li class="nav-item">
+  <a class="color1 navbar-item" href="{% url 'home' %}">Feed</a>
+  </li>
+
+  <li class="nav-item">
+  <a class="color1 navbar-item" href="{% url 'ask' %}"><i class="fas fa-pen-nib"></i> Ask a Question</a>
+  </li>
+
+  <li class="nav-item">
+  <a class="color1 navbar-item" href="{% url 'unanswered' %}">Unanswered Questions</a>
+  </li>
+
+<li class="nav-item">
+  <div class="nav-item dropdown">
+   <a class="nav-link dropdown-toggle pt-0 navbar-item color1" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     account
+   </a>
+   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+     <a class="dropdown-item" href="{% url 'edit_profile' %}">My Profile</a>
+     <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+   </div>
+ </div>
+</li>
+
+</ul>
+
+</nav>
+
+<div class="content container font2">
+  <div class="row">
+          <div class="col-8 z-depth-1" style="background-color: white;">
+            {% block content %}
+            {% endblock %}
+          </div>
+          <div class="col-1"></div>
+          <div class="col-3">
+            <div class="row">
+            <div class="col-12 z-depth-1" style="background-color: white; padding-top: 10px">
+            <p><a class="color1 boldfont" href="{% url 'my_questions' %}"> My Questions</a></p>
+            <p><a class="color1 boldfont" href="{% url 'my_answers' %}">My Answers</a></p>
+            </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 z-depth-1 color1" id="quote" style="background-color: white; padding-top: 10px; margin-top: 20px">
+                <p>Random Quote :</p>
+                <p><i>[[quote.content]]</i></p>
+                <p><i>by [[quote.author]]</i></p>
+              </div>
+            </div>
+          </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+ var quote = new Vue({
+   el: '#quote',
+   delimiters: ['[[',']]'],
+   data: {
+   quote: [],
+   loading: false,
+ },
+   mounted: function() {
+    this.getQuote();
+},
+ methods: {
+   getQuote: function() {
+  this.loading = true;
+  this.$http.get('https://api.quotable.io/random')
+      .then(response => (this.quote = response.data));
+    }
+}
+ });
+ </script>
+
+</body>
+
+</html>
