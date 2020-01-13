@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'prashnottari',
-    'rest_framework',
     'widget_tweaks',
     #'users.apps.UsersConfig',#custom user
 ]
