@@ -75,7 +75,12 @@ def ask(request):
 
 @login_required
 def edit_profile(request):
-    profile = get_object_or_404(Profile, name = request.user)
+    try:
+        profile = Profile.objects.get(name = request.user)
+    except Profile.DoesNotExist:
+        profile = Profile()
+        profile.name = request.user
+
     if request.method == "POST":
         form = ProfileForm(request.POST, instance = profile)
         if form.is_valid():
