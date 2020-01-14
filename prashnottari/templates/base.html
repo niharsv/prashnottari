@@ -18,6 +18,14 @@
 
         <script src="https://kit.fontawesome.com/4bf0daec3f.js" crossorigin="anonymous"></script>
 
+        <style>
+        body {
+          background: url('{% static "images/mainbg.jpg" %}') no-repeat center center fixed;
+          background-size: cover;
+          height: 100%;
+        }
+        </style>
+
 </head>
 
 <body style="background-color: ivory;">
@@ -60,12 +68,12 @@
 
 <div class="content container font2">
   <div class="row">
-          <div class="col-8 z-depth-1" style="background-color: white;">
+          <div class="col-8 z-depth-1" style="background-color: white; margin-bottom: 10px;">
             {% block content %}
             {% endblock %}
           </div>
           <div class="col-1"></div>
-          <div class="col-3">
+          <div class="col-3 offset-7" style="position:fixed">
             <div class="row">
             <div class="col-12 z-depth-1" style="background-color: white; padding-top: 10px">
             <p><a class="color1 boldfont" href="{% url 'my_questions' %}"> My Questions</a></p>
