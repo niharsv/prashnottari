@@ -11,9 +11,13 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=PT+Sans|Vollkorn&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Galada&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/prashnottari.css' %}">
 
         <script src="https://kit.fontawesome.com/4bf0daec3f.js" crossorigin="anonymous"></script>
@@ -32,7 +36,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-toggleable-sm navbar-inverse bg-inverse shadowed_navbar">
 
-  <div style="margin-left: 100px;"><a class="navbar-brand mx-auto font1 color1" href="{% url 'home' %}"><span class="boldfont"><h1>Prashnottari</h1></span></a></div>
+  <div style="margin-left: 100px;"><a class="navbar-brand mx-auto fontbrandname color1" href="{% url 'home' %}"><span class="boldfont"><h1 style="margin-bottom: 0px;">Prashnottari</h1></span></a></div>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -53,7 +57,7 @@
 <li class="nav-item">
   <div class="nav-item dropdown">
    <a class="nav-link dropdown-toggle pt-0 navbar-item color1" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-     account
+     {{user.username}}
    </a>
    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
      <a class="dropdown-item" href="{% url 'edit_profile' %}">My Profile</a>
@@ -72,17 +76,17 @@
             {% block content %}
             {% endblock %}
           </div>
-          <div class="col-1"></div>
-          <div class="col-3 offset-7" style="position:fixed">
+          <div class="col-2 offset-8" style="position:fixed">
             <div class="row">
             <div class="col-12 z-depth-1" style="background-color: white; padding-top: 10px">
             <p><a class="color1 boldfont" href="{% url 'my_questions' %}"> My Questions</a></p>
             <p><a class="color1 boldfont" href="{% url 'my_answers' %}">My Answers</a></p>
+            <p><a class="color1 boldfont" href="#">Bookmarks</a></p>
             </div>
             </div>
 
             <div class="row">
-              <div class="col-12 z-depth-1 color1" id="quote" style="background-color: white; padding-top: 10px; margin-top: 20px">
+              <div class="col-12 z-depth-1 color1" id="quote" style="background-color: white; padding-top: 10px; margin-top: 15px">
                 <p>Random Quote :</p>
                 <p><i>[[quote.content]]</i></p>
                 <p><i>by [[quote.author]]</i></p>
@@ -113,6 +117,8 @@
 }
  });
  </script>
+
+{% block inbody_javascript %}{% endblock %}
 
 </body>
 

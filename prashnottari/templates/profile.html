@@ -3,13 +3,22 @@
   {% block content %}
 
   <p class="boldfont" style="padding-top: 15px;">{{ profile.name }}</p>
-  <form method="post">
+  <form id="bioform" method="post">
     {% csrf_token %}
     {% include 'baseform.html' with form=form %}
     <div class="row justify-content-center font2">
-      <button type="submit" class="btn custom_button">Submit</button>
-      <a class="btn cancel_button" href="{% url 'home' %}">Cancel</a>
+      <div class="col-11">
+        <button type="submit" class="btn custom_button">Submit</button>
+        <a class="btn cancel_button" href="{% url 'home' %}">Cancel</a>
+      </div>
+      <div class="col-1 my-auto">
+        <span class="color1" id="delete_bio" style="font-size: 24px; cursor: pointer;"><i class="fas fa-trash"></i></span>
+      </div>
     </div>
   </form>
 
+  {% endblock %}
+
+  {% block javascript %}
+  
   {% endblock %}

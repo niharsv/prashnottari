@@ -17,6 +17,10 @@
   color: #6b3c29 !important;
 }
 
+.fontbrandname{
+  font-family: 'Galada', cursive;
+}
+
 .font1{
   font-family: 'Vollkorn', serif;
 }
@@ -47,6 +51,10 @@
   font-size: x-large;
 }
 
+.answer_font_size{
+  font-size: larger !important;
+}
+
 .navbar-item{
   padding-left: 50px !important;
   font-weight: 600;
@@ -54,4 +62,12 @@
 
 .boldfont{
   font-weight: bold;
+}
+
+b, strong{
+  font-weight: bold;
+}
+
+.django-ckeditor-widget{
+  display: flex !important;
 }

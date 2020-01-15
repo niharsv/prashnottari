@@ -18,6 +18,8 @@ def unanswered(request):
     questions = Question.objects.all().order_by('-created_date')
     answers = Answer.objects.all().order_by('-added_date')
 
+    tempq = questions.values()
+
     qpks = set()
     apks = set()
     for answer in answers:
@@ -26,14 +28,20 @@ def unanswered(request):
         qpks.add(question.pk)
     uqpks = qpks - apks
 
-    return render(request, 'unanswered_questions.html', {'questions': questions, 'unanswered_question_pks': uqpks})
+    unanswered_questions = questions.filter(pk__in=uqpks)
+
+    return render(request, 'unanswered_questions.html', {'questions': unanswered_questions})
 
 @login_required
 def question_detail(request, pk):
     question = get_object_or_404(Question, pk = pk)
     answers = Answer.objects.filter(question = question)
+    try:
+        user_answer = answers.get(answerer__username = request.user.get_username())
+    except  Answer.DoesNotExist:
+        user_answer = None
 
-    return render(request, 'question_detail.html', {'question': question, 'answers': answers})
+    return render(request, 'question_detail.html', {'question': question, 'answers': answers, 'user_answer': user_answer})
 
 @login_required
 def write_answer(request, pk):
@@ -52,7 +60,7 @@ def write_answer(request, pk):
             answer.answerer = request.user
             answer.added_date = timezone.now()
             answer.save()
-            return redirect('question_detail', pk=pk)
+            return redirect('question_detail', pk = pk)
     else:
         form = AnswerForm(instance=answer)
 
@@ -67,7 +75,7 @@ def ask(request):
             question.asker = request.user
             question.created_date = timezone.now()
             question.save()
-            return redirect('home')
+            return redirect('my_questions')
     else:
         form = QuestionForm()
 
@@ -104,3 +112,19 @@ def my_answers(request):
     answers = Answer.objects.filter(answerer__username = request.user.get_username()).order_by('-added_date')
 
     return render(request, 'my_answers.html', {'answers': answers})
+
+@login_required
+def delete_question(request, pk):
+    question = get_object_or_404(Question, pk = pk)
+    if request.user == question.asker:
+        question.delete()
+
+    return redirect('my_questions')
+
+@login_required
+def delete_answer(request, pk):
+    answer = get_object_or_404(Answer, pk = pk)
+    if request.user == answer.answerer:
+        answer.delete()
+
+    return redirect('question_detail', pk = answer.question.pk)

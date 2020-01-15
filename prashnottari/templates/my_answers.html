@@ -7,8 +7,12 @@
         <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=answer.question.pk %}"><h6>{{ answer.question.text }}</h6></a></p>
         <p class="mb-0">asked by : <span class="boldfont"><i>{{ answer.question.asker }}</i></span> at <i>{{ answer.question.created_date }}</i></p>
         <p>you have added this answer on <i>{{ answer.added_date }}</i></p>
-        <p>{{ answer.text }}</p>
-        <p class="boldfont"><a class="color1" href="{% url 'write_answer' pk=answer.question.pk %}">edit this answer</a></p>
+        <p class="boldfont">
+          <a class="color1" href="{% url 'write_answer' pk=answer.question.pk %}">Edit </a> |
+          <a class="color1" href="{% url 'delete_answer' pk=answer.pk %}">  Delete</a>
+        </p>
+        <p class="font1 answer_font_size">{{ answer.text|safe }}</p>
+
         <br>
       </div>
 

@@ -9,5 +9,7 @@ urlpatterns = [
     path('my_answers', views.my_answers, name='my_answers'),
     path('edit_profile', views.edit_profile, name='edit_profile'),
     path('question/<int:pk>/', views.question_detail, name='question_detail'),
+    path('delete_question/<int:pk>/', views.delete_question, name='delete_question'),
+    path('delete_answer/<int:pk>/', views.delete_answer, name='delete_answer'),
     path('question/<int:pk>/write_answer', views.write_answer, name='write_answer'),
 ]

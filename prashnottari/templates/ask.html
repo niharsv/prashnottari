@@ -2,8 +2,7 @@
 
   {% block content %}
 
-  <div class="font2">
-    <p><i>Your Question :</i></p>
+  <div class="font2" style="padding-top: 20px">
     <form method="post">
       {% csrf_token %}
       {% include 'baseform.html' with form=form %}

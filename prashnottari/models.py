@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Question(models.Model):
@@ -12,7 +13,7 @@ class Question(models.Model):
         return self.text
 
 class Answer(models.Model):
-    text = models.TextField(max_length=5000)
+    text = RichTextField(max_length=5000)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answerer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='answers')
     added_date = models.DateTimeField(default=timezone.now)
@@ -22,7 +23,7 @@ class Answer(models.Model):
 
 class Profile(models.Model):
     name = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    bio = models.CharField(max_length=255)
+    bio = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
