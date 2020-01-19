@@ -5,12 +5,61 @@
     {% for answer in answers %}
       <div>
         <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=answer.question.pk %}"><h6>{{ answer.question.text }}</h6></a></p>
-        <p class="mb-0">asked by : <span class="boldfont"><i>{{ answer.question.asker }}</i></span> at <i>{{ answer.question.created_date }}</i></p>
-        <p>answered by : <span class="boldfont"><i>{{ answer.answerer }}</i></span> at <i>{{ answer.added_date }}</i></p>
+        <div class="row">
+          <div class="col-11">  
+            {% if answer.question.asker == user %}
+            <p class="mb-0">You asked this</p>
+            {% else %}
+            <p class="mb-0">asked by : <span class="boldfont"><i>{{ answer.question.asker }}</i></span> at <i>{{ answer.question.created_date }}</i></p>
+            {% endif %}
+            {% if answer.answerer == user %}
+            <p class="mb-0">You answered</p>
+            {% else %}
+            <p class="mb-0">answered by : <span class="boldfont"><i>{{ answer.answerer }}</i></span> at <i>{{ answer.added_date }}</i></p>
+            {% endif %}
+          </div>
+        <div class="col-1 my-auto">
+            <i id="bm{{answer.pk}}"
+            {% if answer.pk in bookmarked_pks %}class="fas fa-bookmark color1" title="Bookmarked"{% else %}class="far fa-bookmark color1" title="Not Bookmarked"{% endif %}
+              data-toggle="tooltip" style="cursor:pointer;">
+            </i>
+        </div>
+        </div>
         <div class="font1 answer_font_size"><p>{{ answer.text|safe }}</p></div>
+        
         <br>
       </div>
 
     {% endfor %}
+
+    {% endblock %}
+
+    {% block inpagejavascript %}
+    <script type="text/javascript">
+      $('.fa-bookmark').click(function(){
+      var bmid = $(this).attr("id").substr(2);
+      $.ajax(
+      {
+          type:"GET",
+          url: "/bookmark",
+          data:{
+                   anspk : bmid
+          },
+          success: function( data ) 
+          {
+              if($('#bm' + bmid).hasClass("far")){
+                $('#bm' + bmid).removeClass("far");
+                $('#bm' + bmid).addClass("fas");
+                $('#bm' + bmid).attr("title", "Bookmarked");
+              }
+              else{
+                $('#bm' + bmid).removeClass("fas");
+                $('#bm' + bmid).addClass("far");
+                $('#bm' + bmid).attr("title", "Not Bookmarked");
+              }
+          }
+       })
+  });
+  </script>
 
   {% endblock %}

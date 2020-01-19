@@ -2,26 +2,25 @@
 
   {% block content %}
 
-    {% for answer in answers %}
+    {% for answer in bookmarked_answers %}
       <div>
         <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'question_detail' pk=answer.question.pk %}"><h6>{{ answer.question.text }}</h6></a></p>
-        <p class="mb-0">asked by : <span class="boldfont"><i>{{ answer.question.asker }}</i></span> at <i>{{ answer.question.created_date }}</i></p>
-        <p>you have added this answer on <i>{{ answer.added_date }}</i></p>
-        <p class="boldfont">
-          <a class="color1" href="{% url 'write_answer' pk=answer.question.pk %}">Edit </a> |
-          <a class="color1" href="{% url 'delete_answer' pk=answer.pk %}">  Delete</a> | 
-          <i id="bm{{answer.pk}}"
-            {% if answer.pk in bookmarked_pks %}class="fas fa-bookmark color1" title="Bookmarked"{% else %}class="far fa-bookmark color1" title="Not Bookmarked"{% endif %}
-              data-toggle="tooltip" style="cursor:pointer;">
+        <div class="row">
+        <div class="col-11">    
+            <p class="mb-0">asked by : <span class="boldfont"><i>{{ answer.question.asker }}</i></span> at <i>{{ answer.question.created_date }}</i></p>
+            <p>answered by : <span class="boldfont"><i>{{ answer.answerer }}</i></span> at <i>{{ answer.added_date }}</i></p>
+        </div>
+        <div class="col-1 my-auto">
+            <i id="bm{{answer.pk}}" class="fas fa-bookmark color1" title="Bookmarked" data-toggle="tooltip" style="cursor:pointer;">
             </i>
-        </p>
-        <p class="font1 answer_font_size">{{ answer.text|safe }}</p>
-
-        <br>
+        </div>
+        </div>
+        <div class="font1 answer_font_size"><p>{{ answer.text|safe }}</p></div>
       </div>
+    </br>
 
     {% empty %}
-        <p><i>oh, you've not answered any question yet.. </i></p>
+        <p><i>oh, you've not bookmarked any answer yet.. </i></p>
     {% endfor %}
 
   {% endblock %}

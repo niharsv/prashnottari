@@ -36,7 +36,11 @@
           <a class="color1 boldfont" href="{% url 'write_answer' pk=question.pk %}">  Edit
           </a> |
           <a class="color1 boldfont" href="{% url 'delete_answer' pk=user_answer.pk %}">  Delete
-          </a>  )
+          </a> | 
+          <i id="bm{{user_answer.pk}}"
+            {% if user_answer.pk in bookmarked_pks %}class="fas fa-bookmark color1" title="Bookmarked"{% else %}class="far fa-bookmark color1" title="Not Bookmarked"{% endif %}
+              data-toggle="tooltip" style="cursor:pointer;">
+            </i> )
         </span></p>
       </div>
 
@@ -47,14 +51,14 @@
     {% endif %}
 
     {% if answers|length > 1 and user_answer is not None %}
-    <div class="z-depth-1">
+    <div class="z-depth-1" style="margin-bottom: 10px;">
       <p><i>
         Other answers to this question :
       </i></p>
     </div>
     {% else %}
       {% if user_answer is None %}
-      <div class="z-depth-1">
+      <div class="z-depth-1" style="margin-bottom: 10px;">
           {% if answers|length > 0 %}
           Answers to this question :
           {% else %}
@@ -67,11 +71,55 @@
     {% for answer in answers %}
     {% if answer != user_answer %}
     <div class="font2">
-      <p>answer From : <span class="boldfont"><i>{{answer.answerer}}</i></span> at <i>{{answer.added_date}}</i></p>
+      <div class="row">
+        <div class="col-11">
+        <p style="margin-bottom: 0px;">answer From : <span class="boldfont"><i>{{answer.answerer}}</i></span> at <i>{{answer.added_date}}</i></p>
+        </div>
+        <div class="col-1 my-auto">
+          <i id="bm{{answer.pk}}"
+            {% if answer.pk in bookmarked_pks %}class="fas fa-bookmark color1" title="Bookmarked"{% else %}class="far fa-bookmark color1" title="Not Bookmarked"{% endif %}
+              data-toggle="tooltip" style="cursor:pointer;">
+          </i>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-12">
         <div class="font1 answer_font_size"><p>{{answer.text|safe}}</p></div>
+        </div>
+      </div>
       <br>
     </div>
     {% endif %}
     {% endfor %}
+
+  {% endblock %}
+
+  {% block inpagejavascript %}
+    <script type="text/javascript">
+      $('.fa-bookmark').click(function(){
+      var bmid = $(this).attr("id").substr(2);
+      $.ajax(
+      {
+          type:"GET",
+          url: "/bookmark",
+          data:{
+                   anspk : bmid
+          },
+          success: function( data ) 
+          {
+              if($('#bm' + bmid).hasClass("far")){
+                $('#bm' + bmid).removeClass("far");
+                $('#bm' + bmid).addClass("fas");
+                $('#bm' + bmid).attr("title", "Bookmarked");
+              }
+              else{
+                $('#bm' + bmid).removeClass("fas");
+                $('#bm' + bmid).addClass("far");
+                $('#bm' + bmid).attr("title", "Not Bookmarked");
+              }
+          }
+       })
+  });
+  </script>
 
   {% endblock %}

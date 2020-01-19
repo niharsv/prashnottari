@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Question, Answer, Profile
+from .models import Question, Answer, Profile, Bookmark
 
 # Register your models here.
 admin.site.register(Question)
 admin.site.register(Answer)
 admin.site.register(Profile)
+admin.site.register(Bookmark)

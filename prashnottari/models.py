@@ -27,3 +27,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.name
+
+class Bookmark(models.Model):
+    bookmarker_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bookmarks')
+    bookmarked_answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='bookmarks')
+    bookmarking_time = models.DateTimeField(default=timezone.now)        
+
+    def __str__(self):
+        return self.bookmarker_user + " - " + self.bookmarked_answer
