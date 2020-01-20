@@ -35,7 +35,7 @@ body {
 
 <div class="col-sm-4"></div>
 
-<div class="col-sm-4 shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px">
+<div class="col-sm-4 shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 5px">
 
 <div class="row justify-content-center">
   <h2 class="color1 fontbrandname"><b>Prashnottari</b></h2>
@@ -45,17 +45,24 @@ body {
 <form method="post">
   {% csrf_token %}
   {% include 'baseform.html' with form=form %}
-  <div class="row justify-content-center"><button type="submit" class="btn custom_button">Login</button></div>
+  <div class="row justify-content-center"><button type="submit" class="btn custom_button">Sign Up</button></div>
 </form>
 </div>
-<div class="row justify-content-center">New here?&nbsp;<a href="{% url 'signup' %}" class="color1"><u>Sign Up</u></a></div>
+<div class="row justify-content-center">Already a user?&nbsp;<a href="{% url 'login' %}" class="color1"><u>Log In</u></a></div>
 </div>
 
 <div class="col-sm-4"></div>
 </div>
 </div>
 
-
+<script type="text/javascript" >
+    $(document).ready(function(){
+        $("#id_username").attr('placeholder', "Username");
+        $("#id_password1").attr('placeholder', "Password");
+        $("#id_password2").attr('placeholder', "Confirm Password");
+        $("#id_captcha_1").attr('placeholder', "Captcha");
+    });
+</script>
 <script>
   AOS.init();
 </script>

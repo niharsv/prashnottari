@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.utils import timezone
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Question, Answer, Profile, Bookmark
-from .forms import QuestionForm, AnswerForm, ProfileForm
+from .forms import QuestionForm, AnswerForm, ProfileForm, SignUpForm
 
 # Create your views here.
 @login_required
@@ -159,3 +161,15 @@ def bookmark(request):
                return HttpResponse("Success!") # Sending an success response
         else:
                return HttpResponse("Request method is not a GET")
+
+def signup(request):
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('home')
+    return render(request, 'signup.html', {'form': form})
+               

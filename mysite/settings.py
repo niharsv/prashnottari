@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'prashnottari',
     'widget_tweaks',
     'ckeditor',
+    'captcha',
     #'users.apps.UsersConfig',#custom user
 ]
 
@@ -139,3 +140,6 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
+
+CAPTCHA_FOREGROUND_COLOR = '#6b3c29'
+CAPTCHA_LENGTH = 5
