@@ -20,7 +20,7 @@
     <br>
     </div>
 
-    <div class="col-1 my-auto">
+    <div class="col-1 pl-0 my-auto">
       {% if question.asker == user %}
       <p><a href="{% url 'delete_question' pk=question.pk %}"><span class="color1" style="font-size: 24px;"><i class="fas fa-trash"></i></span><a></p>
       {% endif %}
@@ -75,7 +75,7 @@
         <div class="col-11">
         <p style="margin-bottom: 0px;">answer From : <span class="boldfont"><i>{{answer.answerer}}</i></span> at <i>{{answer.added_date}}</i></p>
         </div>
-        <div class="col-1 my-auto">
+        <div class="col-1 pl-0 my-auto">
           <i id="bm{{answer.pk}}"
             {% if answer.pk in bookmarked_pks %}class="fas fa-bookmark color1" title="Bookmarked"{% else %}class="far fa-bookmark color1" title="Not Bookmarked"{% endif %}
               data-toggle="tooltip" style="cursor:pointer;">

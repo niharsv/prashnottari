@@ -11,14 +11,14 @@
               <p><a class="color1 font1 font-weight-bolder question_title" href="{% url 'write_answer' pk=question.pk %}"><h6>{{ question.text }}</h6></a></p>
               <p>asked by : <span class="boldfont"><i>{{ question.asker }}</i></span> at <i>{{ question.created_date }}</i></p>
             </div>
-            <div class="col-1">
+            <div class="col-1 pl-0">
             </div>
           {% else %}
             <div class="col-11">
               <p><span><h6 class="color1 font1 font-weight-bolder question_title">{{ question.text }}</h6></span></p>
               <p>You asked this question at <i>{{ question.created_date }}</i></p>
             </div>
-            <div class="col-1 my-auto">
+            <div class="col-1 pl-0 my-auto">
               <p><a href="{% url 'delete_question' pk=question.pk %}"><span class="color1" style="font-size: 24px;"><i class="fas fa-trash"></i></span></a></p>
             </div>
           {% endif %}

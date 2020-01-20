@@ -18,7 +18,7 @@
             <p class="mb-0">answered by : <span class="boldfont"><i>{{ answer.answerer }}</i></span> at <i>{{ answer.added_date }}</i></p>
             {% endif %}
           </div>
-        <div class="col-1 my-auto">
+        <div class="col-1 pl-0 my-auto">
             <i id="bm{{answer.pk}}"
             {% if answer.pk in bookmarked_pks %}class="fas fa-bookmark color1" title="Bookmarked"{% else %}class="far fa-bookmark color1" title="Not Bookmarked"{% endif %}
               data-toggle="tooltip" style="cursor:pointer;">
