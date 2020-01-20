@@ -9,9 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Prashnottari</title>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/4bf0daec3f.js" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=PT+Sans|Vollkorn&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Galada&display=swap" rel="stylesheet">
@@ -35,7 +37,7 @@ body {
 
 <div class="col-sm-4"></div>
 
-<div class="col-sm-4 shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 5px">
+<div class="col-sm-4 shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 6px; padding-bottom: 6px !important">
 
 <div class="row justify-content-center">
   <h2 class="color1 fontbrandname"><b>Prashnottari</b></h2>
@@ -61,7 +63,21 @@ body {
         $("#id_password1").attr('placeholder', "Password");
         $("#id_password2").attr('placeholder', "Confirm Password");
         $("#id_captcha_1").attr('placeholder', "Captcha");
+
+        // Add refresh button after field (this can be done in the template as well)
+        $('img.captcha').after(
+                $('<span class="captcha-refresh" style="cursor: pointer; margin-left: 10px;"><i class="fas fa-sync-alt color1"></i></span>')
+        );
+
+        // Click-handler for the refresh-link
+        $('.captcha-refresh').click(function () {
+            $.getJSON("/captcha/refresh/", function (result) {
+            $('.captcha').attr('src', result['image_url']);
+            $('#id_captcha_0').val(result['key'])
+            });
+        });
     });
+    
 </script>
 <script>
   AOS.init();
