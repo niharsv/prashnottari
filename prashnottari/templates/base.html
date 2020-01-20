@@ -3,6 +3,9 @@
 <html>
 
 <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Prashnottari</title>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -38,7 +41,12 @@
 
   <div style="margin-left: 100px;"><a class="navbar-brand mx-auto fontbrandname color1" href="{% url 'home' %}"><span class="boldfont"><h1 style="margin-bottom: 0px;">Prashnottari</h1></span></a></div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars color1"></i></span>
+    
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: right">
 
   <ul class="nav navbar-nav ml-auto" style="margin-right: 100px;">
 
@@ -52,6 +60,18 @@
 
   <li class="nav-item">
   <a class="color1 navbar-item" href="{% url 'unanswered' %}">Unanswered Questions</a>
+  </li>
+
+  <li class="nav-item d-block d-sm-none" style="padding-bottom: 6px;">
+    <a class="color1 navbar-item" href="{% url 'my_questions' %}">My Questions</a>
+  </li>
+
+  <li class="nav-item d-block d-sm-none" style="padding-bottom: 6px;">
+    <a class="color1 navbar-item" href="{% url 'my_answers' %}">My Answers</a>
+  </li>
+
+  <li class="nav-item d-block d-sm-none" style="padding-bottom: 6px;">
+    <a class="color1 navbar-item" href="{% url 'my_bookmarks' %}">Bookmarks</a>
   </li>
 
 <li class="nav-item">
@@ -72,13 +92,13 @@
 
 <div class="content container font2">
   <div class="row">
-          <div class="col-8 z-depth-1" style="background-color: white; margin-bottom: 10px;">
+          <div class="col-sm-8 z-depth-1" style="background-color: white; margin-bottom: 10px;">
             {% block content %}
             {% endblock %}
           </div>
-          <div class="col-2 offset-8" style="position:fixed">
+          <div class="col-sm-2 offset-8 d-none d-sm-block" style="position:fixed">
             <div class="row">
-            <div class="col-12 z-depth-1" style="background-color: white; padding-top: 10px">
+            <div class="col-sm-12 z-depth-1" style="background-color: white; padding-top: 10px">
             <p><a class="color1 boldfont" href="{% url 'my_questions' %}"> My Questions</a></p>
             <p><a class="color1 boldfont" href="{% url 'my_answers' %}">My Answers</a></p>
             <p><a class="color1 boldfont" href="{% url 'my_bookmarks' %}">Bookmarks</a></p>
@@ -86,7 +106,7 @@
             </div>
 
             <div class="row">
-              <div class="col-12 z-depth-1 color1" id="quote" style="background-color: white; padding-top: 10px; margin-top: 15px">
+              <div class="col-sm-12 z-depth-1 color1" id="quote" style="background-color: white; padding-top: 10px; margin-top: 15px">
                 <p>Random Quote :</p>
                 <p><i>[[quote.content]]</i></p>
                 <p><i>by [[quote.author]]</i></p>

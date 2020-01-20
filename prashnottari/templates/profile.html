@@ -11,14 +11,23 @@
         <button type="submit" class="btn custom_button">Submit</button>
         <a class="btn cancel_button" href="{% url 'home' %}">Cancel</a>
       </div>
-      <div class="col-1 my-auto">
-        <span class="color1" id="delete_bio" style="font-size: 24px; cursor: pointer;"><i class="fas fa-trash"></i></span>
+      <div class="col-1 pl-0 my-auto">
+        <span class="color1" style="font-size: 24px; cursor: pointer;"><i class="fas fa-trash" id="delete_bio" onclick="javascript:eraseText();"></i></span>
       </div>
     </div>
   </form>
 
   {% endblock %}
 
-  {% block javascript %}
+  {% block inpagejavascript %}
   
+  <script type="text/javascript">
+  
+    $(document).ready(function() {
+      $('#delete_bio').click(function(){
+        $('#id_bio').val("");
+      });
+    });
+
+   </script> 
   {% endblock %}
