@@ -177,7 +177,7 @@ def signup(request):
         form = SignUpForm()    
     return render(request, 'signup.html', {'form': form})
                
-
+@login_required
 def error_404_view(request, exception):
     data = {}
     return render(request,'error_404.html', data)               
