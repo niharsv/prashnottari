@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.conf.urls import handler404
 from django.urls import path, include
 from prashnottari.views import signup
 from prashnottari.forms import CustomAuthForm
@@ -27,3 +28,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('captcha/', include('captcha.urls')),
 ]
+
+handler404 = 'prashnottari.views.error_404_view'
